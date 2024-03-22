@@ -1,2 +1,2 @@
-# azoka
+# Azoka
 Azoka Fullstack Ecommerce Project
