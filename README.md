@@ -1,5 +1,4 @@
-# azoka
-
+# Azoka
 Azoka Fullstack Ecommerce Project
 
 ## Steps to run project:
