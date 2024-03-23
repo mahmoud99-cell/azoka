@@ -1,6 +1,9 @@
 # Azoka
 Azoka Fullstack Ecommerce Project
 
+Refrences :
+- [MedusaJS](https://github.com/medusajs/medusa-starter-default)
+- [mobile-medusa](https://github.com/bidah/mobile-medusa)
 ## Steps to run project:
 
 - Clone repo ``git@github.com:Azoka-Project/azoka.git``
