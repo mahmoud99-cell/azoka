@@ -6,10 +6,11 @@
 version: 2
 updates:
   - package-ecosystem: "npm"
-    directory: "/azoka-backend-admin" # Location of package manifests for the backend
+    directory: "/"
     schedule:
       interval: "monthly"
-  - package-ecosystem: "npm"
-    directory: "/mobile-medusa-main" # Location of package manifests for the frontend
-    schedule:
-      interval: "monthly"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    versioning-strategy: "increase-if-necessary"
+
