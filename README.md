@@ -13,5 +13,5 @@ Azoka Fullstack Ecommerce Project
 
 - ### Expo App run:
 - in new windows powershell terminal, run `npm i`
-- after finishing install , run `npm start`
+- after finishing install ,`cd mobile-medusa-main` then  run  `npm start`
 - #### Note : you need to check the MEDUSA_BACKEND_URL in mobile-medusa-main\lib\config.ts , try instead of localhost change it with your ip : run `ipconfig` to know you ip 
