@@ -9,7 +9,7 @@ Refrences :
 - Clone repo ``git@github.com:Azoka-Project/azoka.git``
 
 - ### Backend run:
-- In vs code terminal , open 1 tabs Windows power shell
+- In vs code terminal , open 1 new Windows power shell tab 
 - `cd azoka-backend-admin` 
 - then `npm i`
 - after finishing install , run `npm run dev`
