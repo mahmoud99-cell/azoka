@@ -12,7 +12,7 @@ Refrences :
 - In vs code terminal , open 1 new Windows power shell tab 
 - `cd azoka-backend-admin` 
 - Then `npm i`
-- a\After finishing install (make sure doocker database container running before before running the backend) , run `npm run dev`
+- After finishing install (make sure doocker database container running before before running the backend) , run `npm run dev`
 
 - ### Expo App run:
 - In new windows powershell terminal, run `npm i`
