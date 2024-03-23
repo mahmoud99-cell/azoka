@@ -11,10 +11,10 @@ Refrences :
 - ### Backend run:
 - In vs code terminal , open 1 new Windows power shell tab 
 - `cd azoka-backend-admin` 
-- then `npm i`
-- after finishing install , run `npm run dev`
+- Then `npm i`
+- a\After finishing install (make sure doocker database container running before before running the backend) , run `npm run dev`
 
 - ### Expo App run:
-- in new windows powershell terminal, run `npm i`
-- after finishing install ,`cd mobile-medusa-main` then  run  `npm start`
-- #### Note : you need to check the MEDUSA_BACKEND_URL in mobile-medusa-main\lib\config.ts , try instead of localhost change it with your ip : run `ipconfig` to know you ip 
+- In new windows powershell terminal, run `npm i`
+- After finishing install ,`cd mobile-medusa-main` then  run  `npm start`
+- #### Note : you need to check the MEDUSA_BACKEND_URL in mobile-medusa-main\lib\config.ts , try instead of localhost change it with your ip : run `ipconfig` to know you ip , just changes it to expo go ip in the expo go`s connection string
