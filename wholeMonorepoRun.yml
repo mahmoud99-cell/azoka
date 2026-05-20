@@ -1,0 +1,154 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: azoka_postgres
+    restart: unless-stopped
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+    environment:
+      POSTGRES_USER: azoka
+      POSTGRES_PASSWORD: azoka
+      POSTGRES_DB: azokadb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - azoka_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U azoka -d azokadb"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  seed:
+    build:
+      context: ./azoka-backend-admin
+      target: dev
+    container_name: azoka_backend_seed
+    restart: "no"
+
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgres://azoka:azoka@postgres:5432/azokadb
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    command: >
+      sh -c "
+        if [ -f /var/azoka/.seeded ]; then
+          echo 'Seed already applied';
+          exit 0;
+        fi;
+
+        echo 'Running DB setup...';
+        medusa db:setup;
+
+        echo 'Seeding database...';
+        medusa exec ./data/seed.js;
+
+        touch /var/azoka/.seeded;
+      "
+
+    volumes:
+      - ./azoka-backend-admin:/app
+      - backend_state:/var/azoka
+      - /app/node_modules
+    networks:
+      - azoka_network
+
+  backend:
+    build:
+      context: ./azoka-backend-admin
+      target: dev
+    container_name: azoka_backend
+    restart: unless-stopped
+
+    command: >
+      sh -c "
+        echo "DATABASE_URL=$DATABASE_URL"
+
+        echo 'Waiting for DB...';
+        sleep 5;
+
+        until pg_isready -h postgres -U azoka -d azokadb; do
+          echo 'Waiting for DB...';
+          sleep 2;  
+        done
+        echo 'DB ready, starting Medusa';
+        pnpm run dev;
+      "
+
+    environment:
+      NODE_ENV: development
+      PORT: 9000
+      DATABASE_URL: postgres://azoka:azoka@postgres:5432/azokadb
+      ADMIN_CORS: http://localhost:7000,http://localhost:7001
+      STORE_CORS: http://localhost:8000
+      JWT_SECRET: supersecret
+      COOKIE_SECRET: supersecret
+      DB_POOL_MIN: 1
+      DB_POOL_MAX: 10
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    ports:
+      - "9000:9000"
+      - "7000:7000"
+      - "5173:5173"
+
+    volumes:
+      - ./azoka-backend-admin:/app
+      - backend_state:/var/azoka
+      - /app/node_modules
+
+    networks:
+      - azoka_network    
+  mobile:
+    build:
+      context: ./mobile-medusa-main
+      dockerfile: Dockerfile
+    container_name: azoka_mobile
+    restart: unless-stopped
+
+    environment:
+      EXPO_PUBLIC_MEDUSA_BACKEND_URL: http://host.docker.internal:9000
+      EXPO_DEVTOOLS_LISTEN_ADDRESS: 0.0.0.0
+      HOST: 0.0.0.0
+      BROWSER: none
+
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+    depends_on:
+      backend:
+        condition: service_started
+
+    ports:
+      - "19000:19000"
+      - "19001:19001"
+      - "19002:19002"
+      - "19006:19006"
+
+    volumes:
+      - ./mobile-medusa-main:/app
+      - /app/node_modules
+
+    stdin_open: true
+    tty: true
+
+    networks:
+      - azoka_network
+
+volumes:
+  postgres_data:
+  backend_state:
+
+networks:
+  azoka_network:
+    driver: bridge
