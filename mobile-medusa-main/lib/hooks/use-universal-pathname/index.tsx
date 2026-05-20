@@ -1,1 +1,0 @@
-export { useUniversalPathname } from './useUniversalPathname'
