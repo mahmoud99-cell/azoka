@@ -1,4 +1,4 @@
-const { getDefaultConfig } = require('@expo/metro-config');
+const { getDefaultConfig } = require('expo/metro-config');
 const { withNativeWind } = require('nativewind/metro');
 const {
   wrapWithReanimatedMetroConfig,
@@ -8,7 +8,7 @@ const {
  * Metro configuration
  * https://docs.expo.dev/bare/installing-expo-modules/
  *
- * @type {import('@expo/metro-config').MetroConfig}
+ * @type {import('expo/metro-config').MetroConfig}
  */
 const config = getDefaultConfig(__dirname);
 

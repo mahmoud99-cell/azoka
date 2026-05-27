@@ -6,21 +6,11 @@
       "ios",
       "android"
     ],
-    "userInterfaceStyle": "automatic",
-    "ios": {
-      "bundleIdentifier": "com.rnstartermedusa"
-    },
-    "android": {
-      "package": "com.rnstartermedusa"
-    },
     "runtimeVersion": {
       "policy": "sdkVersion"
     },
     "experiments": {
       "autolinkingModuleResolution": true
-    },
-    "plugins": [
-      "expo-web-browser"
-    ]
+    }
   }
 }
