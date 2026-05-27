@@ -7,7 +7,7 @@
     "ios": "expo run:ios",
     "lint": "eslint .",
     "start": "expo start",
-    "dev": "expo start",
+    "dev": "expo start -c --tunnel",
     "test": "jest"
   },
   "dependencies": {
