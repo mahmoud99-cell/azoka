@@ -1,14 +1,9 @@
 {
   "expo": {
-    "name": "RnStarterMedusa",
-    "slug": "rn-starter-medusa",
-    "platforms": [
-      "ios",
-      "android"
-    ],
-    "runtimeVersion": {
-      "policy": "sdkVersion"
-    },
+    "name": "Azoka",
+    "slug": "azoka",
+    "platforms": ["ios", "android"],
+    "runtimeVersion": { "policy": "sdkVersion" },
     "experiments": {
       "autolinkingModuleResolution": true
     }

@@ -1,8 +1,7 @@
 module.exports = {
-  presets: ['babel-preset-expo', 'nativewind/babel'],
+  presets: ['babel-preset-expo'],
   plugins: [
     'react-native-worklets/plugin',
-    'module:react-native-dotenv',
     [
       'module-resolver',
       {
