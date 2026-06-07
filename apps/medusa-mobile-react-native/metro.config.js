@@ -1,19 +1,18 @@
-const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
-const {withNativeWind} = require('nativewind/metro');
+const path = require('path');
+const { getDefaultConfig } = require('expo/metro-config');
+const { withNativeWind } = require('nativewind/metro');
 const {
   wrapWithReanimatedMetroConfig,
 } = require('react-native-reanimated/metro-config');
 
-/**
- * Metro configuration
- * https://reactnative.dev/docs/metro
- *
- * @type {import('@react-native/metro-config').MetroConfig}
- */
-const config = mergeConfig(getDefaultConfig(__dirname), {
-  /* your config */
-});
+const config = getDefaultConfig(__dirname);
+
+config.watchFolders = [path.resolve(__dirname, '../../')];
+config.resolver.nodeModulesPaths = [
+  path.resolve(__dirname, 'node_modules'),
+  path.resolve(__dirname, '../../node_modules'),
+];
 
 module.exports = wrapWithReanimatedMetroConfig(
-  withNativeWind(config, {input: './app/styles/global.css'}),
+  withNativeWind(config, { input: './app/styles/global.css' }),
 );

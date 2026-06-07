@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import Constants from 'expo-constants';
 import {
   createStaticNavigation,
   StaticParamList,
@@ -41,6 +42,10 @@ export type RootStackParamList = StaticParamList<typeof RootStack>;
 const queryClient = new QueryClient();
 
 export default function App() {
+  useEffect(() => {
+    console.log('Expo systemFonts:', Constants.systemFonts);
+  }, []);
+
   return (
     <ThemeProvider name="default">
       <LocaleProvider>
